@@ -38,6 +38,10 @@ namespace Librarian
 
 		    services.AddDbContext<ExampleContext>(options =>
 		            options.UseSqlServer(Configuration.GetConnectionString("ExampleContext")));
+
+		    services.AddDbContext<UsersContext>(options =>
+		            options.UseSqlServer(Configuration.GetConnectionString("UsersContext")));
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
