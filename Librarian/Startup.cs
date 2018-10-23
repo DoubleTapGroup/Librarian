@@ -39,6 +39,9 @@ namespace Librarian
 		    services.AddDbContext<ExampleContext>(options =>
 		            options.UseSqlServer(Configuration.GetConnectionString("ExampleContext")));
 
+		    services.AddDbContext<RentalsContext>(options =>
+		            options.UseSqlServer(Configuration.GetConnectionString("RentalsContext")));
+
 		    services.AddDbContext<UsersContext>(options =>
 		            options.UseSqlServer(Configuration.GetConnectionString("UsersContext")));
 
