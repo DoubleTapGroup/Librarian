@@ -6,13 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Librarian.Models
 {
-    public class BookContext : DbContext
+    public class LibrarianContext : DbContext
     {
-        public BookContext (DbContextOptions<BookContext> options)
+        public LibrarianContext (DbContextOptions<LibrarianContext> options)
             : base(options)
         {
         }
 
         public DbSet<Librarian.Models.Book> Book { get; set; }
-    }
+		public DbSet<Librarian.Models.Rental> Rental { get; set; }
+		public DbSet<Librarian.Models.User> User { get; set; }
+	}
 }

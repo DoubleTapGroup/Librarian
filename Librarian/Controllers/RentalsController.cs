@@ -11,9 +11,9 @@ namespace Librarian.Controllers
 {
     public class RentalsController : Controller
     {
-        private readonly RentalsContext _context;
+        private readonly LibrarianContext _context;
 
-        public RentalsController(RentalsContext context)
+        public RentalsController(LibrarianContext context)
         {
             _context = context;
         }

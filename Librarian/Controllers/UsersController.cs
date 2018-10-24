@@ -11,9 +11,9 @@ namespace Librarian.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UsersContext _context;
+        private readonly LibrarianContext _context;
 
-        public UsersController(UsersContext context)
+        public UsersController(LibrarianContext context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace Librarian.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UsersModel.ToListAsync());
+            return View(await _context.User.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -32,7 +32,7 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var usersModel = await _context.UsersModel
+            var usersModel = await _context.User
                 .FirstOrDefaultAsync(m => m.UserID == id);
             if (usersModel == null)
             {
@@ -53,7 +53,7 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,FisrtName,LastName,PhoneNumber,Email,Adress")] UsersModel usersModel)
+        public async Task<IActionResult> Create([Bind("UserID,FisrtName,LastName,PhoneNumber,Email,Adress")] User usersModel)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var usersModel = await _context.UsersModel.FindAsync(id);
+            var usersModel = await _context.User.FindAsync(id);
             if (usersModel == null)
             {
                 return NotFound();
@@ -85,7 +85,7 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,FisrtName,LastName,PhoneNumber,Email,Adress")] UsersModel usersModel)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,FisrtName,LastName,PhoneNumber,Email,Adress")] User usersModel)
         {
             if (id != usersModel.UserID)
             {
@@ -123,7 +123,7 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var usersModel = await _context.UsersModel
+            var usersModel = await _context.User
                 .FirstOrDefaultAsync(m => m.UserID == id);
             if (usersModel == null)
             {
@@ -138,15 +138,15 @@ namespace Librarian.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usersModel = await _context.UsersModel.FindAsync(id);
-            _context.UsersModel.Remove(usersModel);
+            var usersModel = await _context.User.FindAsync(id);
+            _context.User.Remove(usersModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsersModelExists(int id)
         {
-            return _context.UsersModel.Any(e => e.UserID == id);
+            return _context.User.Any(e => e.UserID == id);
         }
     }
 }
