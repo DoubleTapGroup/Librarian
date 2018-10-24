@@ -9,22 +9,22 @@ using Librarian.Models;
 
 namespace Librarian.Controllers
 {
-    public class ExamplesController : Controller
+    public class BooksController : Controller
     {
-        private readonly ExampleContext _context;
+        private readonly LibrarianContext _context;
 
-        public ExamplesController(ExampleContext context)
+        public BooksController(LibrarianContext context)
         {
             _context = context;
         }
 
-        // GET: Examples
+        // GET: Books
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Example.ToListAsync());
+            return View(await _context.Book.ToListAsync());
         }
 
-        // GET: Examples/Details/5
+        // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var example = await _context.Example
+            var book = await _context.Book
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (example == null)
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return View(example);
+            return View(book);
         }
 
-        // GET: Examples/Create
+        // GET: Books/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Examples/Create
+        // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Jeff,ForeignKey")] Example example)
+        public async Task<IActionResult> Create([Bind("ID,ISBN,Title,AuthorID,PublisherID")] Book book)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(example);
+                _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(example);
+            return View(book);
         }
 
-        // GET: Examples/Edit/5
+        // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var example = await _context.Example.FindAsync(id);
-            if (example == null)
+            var book = await _context.Book.FindAsync(id);
+            if (book == null)
             {
                 return NotFound();
             }
-            return View(example);
+            return View(book);
         }
 
-        // POST: Examples/Edit/5
+        // POST: Books/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Jeff,ForeignKey")] Example example)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ISBN,Title,AuthorID,PublisherID")] Book book)
         {
-            if (id != example.ID)
+            if (id != book.ID)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace Librarian.Controllers
             {
                 try
                 {
-                    _context.Update(example);
+                    _context.Update(book);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ExampleExists(example.ID))
+                    if (!BookExists(book.ID))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace Librarian.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(example);
+            return View(book);
         }
 
-        // GET: Examples/Delete/5
+        // GET: Books/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var example = await _context.Example
+            var book = await _context.Book
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (example == null)
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return View(example);
+            return View(book);
         }
 
-        // POST: Examples/Delete/5
+        // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var example = await _context.Example.FindAsync(id);
-            _context.Example.Remove(example);
+            var book = await _context.Book.FindAsync(id);
+            _context.Book.Remove(book);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ExampleExists(int id)
+        private bool BookExists(int id)
         {
-            return _context.Example.Any(e => e.ID == id);
+            return _context.Book.Any(e => e.ID == id);
         }
     }
 }

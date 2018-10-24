@@ -34,17 +34,10 @@ namespace Librarian
 			});
 
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);      
 
-		    services.AddDbContext<ExampleContext>(options =>
-		            options.UseSqlServer(Configuration.GetConnectionString("ExampleContext")));
-
-		    services.AddDbContext<RentalsContext>(options =>
-		            options.UseSqlServer(Configuration.GetConnectionString("RentalsContext")));
-
-		    services.AddDbContext<UsersContext>(options =>
-		            options.UseSqlServer(Configuration.GetConnectionString("UsersContext")));
-
+		    services.AddDbContext<LibrarianContext>(options =>
+		            options.UseSqlServer(Configuration.GetConnectionString("LibrarianContext")));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

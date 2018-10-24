@@ -8,7 +8,6 @@ namespace Librarian.Models
 {
     public class Rental
     {
-
         [Key]
         public int RentalID { get; set; }
 
@@ -17,6 +16,5 @@ namespace Librarian.Models
 
         [Display(Name = "Return date")]
         public DateTime ReturnDate { get; set; }
-
     }
 }

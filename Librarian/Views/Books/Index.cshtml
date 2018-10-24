@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Librarian.Models.Example>
+﻿@model IEnumerable<Librarian.Models.Book>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Jeff)
+                @Html.DisplayNameFor(model => model.ISBN)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ForeignKey)
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublisherID)
             </th>
             <th></th>
         </tr>
@@ -25,10 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Jeff)
+                @Html.DisplayFor(modelItem => item.ISBN)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ForeignKey)
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublisherID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
