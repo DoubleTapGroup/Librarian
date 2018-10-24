@@ -19,9 +19,9 @@ namespace Librarian.Models
         public string Title { get; set; }
 
         [Display(Name = "AuthorID")]
-        public string AuthorID { get; set; }
+        public int AuthorID { get; set; }
 
         [Display(Name = "PublisherID")]
-        public string PublisherID { get; set; }
+        public int PublisherID { get; set; }
     }
 }
