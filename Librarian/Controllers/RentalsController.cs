@@ -18,8 +18,9 @@ namespace Librarian.Controllers
             _context = context;
         }
 
-        // GET: Rentals
-        public async Task<IActionResult> Index()
+		// GET: Rentals
+		[HttpGet("/rentals")]
+		public async Task<IActionResult> Index()
         {
             return View(await _context.Rental.ToListAsync());
         }

@@ -19,13 +19,15 @@ namespace Librarian.Controllers
         }
 
         // GET: Books
+		[HttpGet("/books")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Book.ToListAsync());
         }
 
-        // GET: Books/Details/5
-        public async Task<IActionResult> Details(int? id)
+		// GET: Books/Details/5
+		[HttpGet("/books/details/{id?}")]
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -42,8 +44,9 @@ namespace Librarian.Controllers
             return View(book);
         }
 
-        // GET: Books/Create
-        public IActionResult Create()
+		// GET: Books/Create
+		[HttpGet("/books/create")]
+		public IActionResult Create()
         {
             return View();
         }
@@ -64,8 +67,9 @@ namespace Librarian.Controllers
             return View(book);
         }
 
-        // GET: Books/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// GET: Books/Edit/5
+		[HttpGet("/books/edit/{id?}")]
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -115,8 +119,9 @@ namespace Librarian.Controllers
             return View(book);
         }
 
-        // GET: Books/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Books/Delete/5
+		[HttpGet("/books/delete/{id?}")]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
