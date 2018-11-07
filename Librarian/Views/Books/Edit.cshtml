@@ -1,45 +1,47 @@
 ﻿@model Librarian.Models.Book
 
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+@section ModelList
+    {
+    <div class="panel">
+        <div class="panel-division">
+            <div class="panel-division dim">
+                <form>
+                    <div class="input-group">
+                        <div class="input-group-prefix">
+                            <span>ISBN</span>
+                        </div>
+                        <input type="text" name="ISBN" />
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prefix">
+                            <span>Title</span>
+                        </div>
+                        <input type="text" name="Title" />
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prefix">
+                            <span>Author ID</span>
+                        </div>
+                        <input type="text" name="AuthorID" />
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prefix">
+                            <span>Publisher ID</span>
+                        </div>
+                        <input type="text" name="PublisherID" />
+                    </div>
+                </form>
 
-<h4>Book</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="ISBN" class="control-label"></label>
-                <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
+                <hr />
+                <div>
+                    <button type="reset">Back to List</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AuthorID" class="control-label"></label>
-                <input asp-for="AuthorID" class="form-control" />
-                <span asp-validation-for="AuthorID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PublisherID" class="control-label"></label>
-                <input asp-for="PublisherID" class="form-control" />
-                <span asp-validation-for="PublisherID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+}

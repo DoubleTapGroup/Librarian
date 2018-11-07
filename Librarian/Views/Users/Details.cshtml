@@ -1,48 +1,63 @@
 ﻿@model Librarian.Models.User
 
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+@section ModelList
+    {
+    <div class="panel">
+        <div class="panel-division">
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.FisrtName) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.FisrtName)
+                </div>
+            </div>
+            <hr />
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.LastName) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.LastName)
+                </div>
+            </div>
+            <hr />
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.PhoneNumber) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </div>
+            </div>
+            <hr />
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.Email) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.Email)
+                </div>
+            </div>
+            <hr />
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.Adress) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.Adress)
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div>
-    <h4>UsersModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FisrtName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FisrtName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Adress)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Adress)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.UserID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="flex">
+        <button class="ml-4" type="button">Edit</button>
+        <button class="ml-4" type="reset">Back to List</button>
+    </div>
+}

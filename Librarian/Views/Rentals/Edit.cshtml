@@ -7,17 +7,29 @@
 
 @section ModelList
 {
+    <div class="panel">
+        <div class="panel-division">
+            <div class="panel-division dim">
+                <form>
+                    <div class="input-group">
+                        <div class="input-group-prefix">
+                            <span>Rental Date</span>
+                        </div>
+                        <input type="text" name="RentalDate" />
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prefix">
+                            <span>Return Date</span>
+                        </div>
+                        <input type="text" name="ReturnDate" />
+                    </div>
+                </form>
 
-<form>
-    <div class="input-group">
-        <div class="input-group-prefix">
-            <span>Input label</span>
+                <hr />
+                <div>
+                    <button type="reset">Back to List</button>
+                </div>
+            </div>
         </div>
-        <input type="text" name="RentalName"/>
-    </div> 
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    </div>
 }

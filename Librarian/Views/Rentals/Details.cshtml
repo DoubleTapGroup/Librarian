@@ -7,26 +7,30 @@
 
 @section ModelList
 {
-
-<div class="panel-division">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RentalDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RentalDate)
-        </dd>
-        <hr />
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ReturnDate)
-        </dd>
-    </dl>
-</div>
-<div class="flex">
-    <button class="ml-4" type="button">Edit</button>
-    <button class="ml-4" type="reset">Back to List</button>
-</div>
+    <div class="panel">
+        <div class="panel-division">
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.RentalDate) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.RentalDate)
+                </div> 
+            </div>
+            <hr />
+            <div class="flex">
+                <div class="ml-4">
+                    <b>@Html.DisplayNameFor(model => model.ReturnDate) :</b>
+                </div>
+                <div class="ml-4">
+                    @Html.DisplayFor(model => model.ReturnDate)
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="flex">
+        <button class="ml-4" type="button">Edit</button>
+        <button class="ml-4" type="reset">Back to List</button>
+    </div>
 }
