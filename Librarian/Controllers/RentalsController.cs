@@ -26,6 +26,7 @@ namespace Librarian.Controllers
         }
 
         // GET: Rentals/Details/5
+        [HttpGet("/rentals/details/{id?}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +45,7 @@ namespace Librarian.Controllers
         }
 
         // GET: Rentals/Create
+        [HttpGet("/rentals/create")]
         public IActionResult Create()
         {
             return View();
@@ -66,6 +68,7 @@ namespace Librarian.Controllers
         }
 
         // GET: Rentals/Edit/5
+        [HttpGet("/rentals/edit/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -117,6 +120,7 @@ namespace Librarian.Controllers
         }
 
         // GET: Rentals/Delete/5
+        [HttpGet("/rentals/delete/{id?}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
