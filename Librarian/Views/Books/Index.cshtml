@@ -7,43 +7,52 @@
 
 @section ModelList
 {
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuthorID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PublisherID)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuthorID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PublisherID)
-        </td>
-        <td class="flex">
-            <button class="ml-a" type="button">Edit</button>
-            <button class="ml-4" type="button">Details</button>
-            <button class="ml-4" type="reset">Delete</button>
-        </td>
-    </tr>
-    }
-</table>
+<div class="panel">
+    <div class="panel-division">
+        <div class="panel-division">
+            <button type="button">Create</button>
+        </div>
+    </div>
+    <div class="panel-division dim">
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AuthorID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PublisherID)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublisherID)
+                </td>
+                <td class="flex">
+                    <button class="ml-a" type="button">Edit</button>
+                    <button class="ml-4" type="button">Details</button>
+                    <button class="ml-4" type="reset">Delete</button>
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>
 }

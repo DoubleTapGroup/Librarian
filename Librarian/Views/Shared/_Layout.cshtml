@@ -12,14 +12,7 @@
         @await Html.PartialAsync("_Menu.cshtml")
         <div id="content" class="flex fd-c fg-1">
             <h2>@ViewData["Title"]</h2>
-            <div class="panel">
-                <div class="panel-division">
-                    <button type="button">Create</button>
-                </div>
-                <div class="panel-division dim">
-                    @RenderSection("ModelList")
-                </div>
-            </div>
+            @RenderSection("ModelList")
         </div>
     </div>
 </body>
