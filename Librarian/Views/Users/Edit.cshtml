@@ -2,53 +2,46 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-<h4>UsersModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+@section Content
+{
+<div class="panel">
+    <div class="panel-division">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UserID" />
-            <div class="form-group">
-                <label asp-for="FisrtName" class="control-label"></label>
-                <input asp-for="FisrtName" class="form-control" />
-                <span asp-validation-for="FisrtName" class="text-danger"></span>
+            <input type="hidden" asp-for="UserId" />
+            <div class="flex fd-c">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+            <div class="flex fd-c">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
+            <div class="flex fd-c">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+            <div class="flex fd-c">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Adress" class="control-label"></label>
-                <input asp-for="Adress" class="form-control" />
-                <span asp-validation-for="Adress" class="text-danger"></span>
+            <div class="flex fd-c">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <input class="mb-4" type="submit" value="Save"/>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<a asp-action="Index">Back to List</a>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

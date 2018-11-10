@@ -21,11 +21,12 @@ namespace Librarian.Controllers
         // GET: Rentals
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rental.ToListAsync());
+            var librarianContext = _context.Rental.Include(r => r.Book).Include(r => r.User);
+            return View(await librarianContext.ToListAsync());
         }
 
-        // GET: Rentals/Details/5
-        public async Task<IActionResult> Details(int? id)
+		// GET: Rentals/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -33,7 +34,10 @@ namespace Librarian.Controllers
             }
 
             var rental = await _context.Rental
-                .FirstOrDefaultAsync(m => m.RentalID == id);
+                .Include(r => r.Book)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(m => m.RentalId == id);
+
             if (rental == null)
             {
                 return NotFound();
@@ -45,6 +49,8 @@ namespace Librarian.Controllers
         // GET: Rentals/Create
         public IActionResult Create()
         {
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId");
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId");
             return View();
         }
 
@@ -53,7 +59,7 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RentalID,RentalDate,ReturnDate")] Rental rental)
+        public async Task<IActionResult> Create([Bind("RentalId,RentalDate,ReturnDate,BookId,UserId")] Rental rental)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +67,8 @@ namespace Librarian.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", rental.BookId);
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId", rental.UserId);
             return View(rental);
         }
 
@@ -77,6 +85,8 @@ namespace Librarian.Controllers
             {
                 return NotFound();
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", rental.BookId);
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId", rental.UserId);
             return View(rental);
         }
 
@@ -85,9 +95,9 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RentalID,RentalDate,ReturnDate")] Rental rental)
+        public async Task<IActionResult> Edit(int id, [Bind("RentalId,RentalDate,ReturnDate,BookId,UserId")] Rental rental)
         {
-            if (id != rental.RentalID)
+            if (id != rental.RentalId)
             {
                 return NotFound();
             }
@@ -101,7 +111,7 @@ namespace Librarian.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RentalExists(rental.RentalID))
+                    if (!RentalExists(rental.RentalId))
                     {
                         return NotFound();
                     }
@@ -112,6 +122,8 @@ namespace Librarian.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", rental.BookId);
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId", rental.UserId);
             return View(rental);
         }
 
@@ -124,7 +136,9 @@ namespace Librarian.Controllers
             }
 
             var rental = await _context.Rental
-                .FirstOrDefaultAsync(m => m.RentalID == id);
+                .Include(r => r.Book)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(m => m.RentalId == id);
             if (rental == null)
             {
                 return NotFound();
@@ -146,7 +160,7 @@ namespace Librarian.Controllers
 
         private bool RentalExists(int id)
         {
-            return _context.Rental.Any(e => e.RentalID == id);
+            return _context.Rental.Any(e => e.RentalId == id);
         }
     }
 }

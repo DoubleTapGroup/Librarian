@@ -19,59 +19,148 @@ namespace Librarian.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Librarian.Models.Book", b =>
+            modelBuilder.Entity("Librarian.Models.Author", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("AuthorId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorID");
+                    b.Property<string>("Name");
+
+                    b.HasKey("AuthorId");
+
+                    b.ToTable("Author");
+
+                    b.HasData(
+                        new { AuthorId = 1, Name = "Isaac Asimov" },
+                        new { AuthorId = 2, Name = "Neil DeGrasse Tyson" }
+                    );
+                });
+
+            modelBuilder.Entity("Librarian.Models.Book", b =>
+                {
+                    b.Property<int>("BookId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuthorId");
 
                     b.Property<string>("ISBN");
 
-                    b.Property<string>("PublisherID");
+                    b.Property<int>("PublisherId");
 
                     b.Property<string>("Title");
 
-                    b.HasKey("ID");
+                    b.HasKey("BookId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("PublisherId");
 
                     b.ToTable("Book");
+
+                    b.HasData(
+                        new { BookId = 1, AuthorId = 2, ISBN = "IBS-1024-691", PublisherId = 1, Title = "Physics for people in the hurry" },
+                        new { BookId = 2, AuthorId = 1, ISBN = "IBS-512-1324", PublisherId = 2, Title = "Autonomous Mind" }
+                    );
+                });
+
+            modelBuilder.Entity("Librarian.Models.Publisher", b =>
+                {
+                    b.Property<int>("PublisherId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("PublisherId");
+
+                    b.ToTable("Publisher");
+
+                    b.HasData(
+                        new { PublisherId = 1, Name = "BigEarth Publishing Company" },
+                        new { PublisherId = 2, Name = "(HOS) High Octane Society" }
+                    );
                 });
 
             modelBuilder.Entity("Librarian.Models.Rental", b =>
                 {
-                    b.Property<int>("RentalID")
+                    b.Property<int>("RentalId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BookId");
+
                     b.Property<DateTime>("RentalDate");
 
-                    b.Property<DateTime>("ReturnDate");
+                    b.Property<DateTime?>("ReturnDate");
 
-                    b.HasKey("RentalID");
+                    b.Property<int>("UserId");
+
+                    b.HasKey("RentalId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Rental");
+
+                    b.HasData(
+                        new { RentalId = 1, BookId = 1, RentalDate = new DateTime(2018, 11, 10, 16, 39, 53, 651, DateTimeKind.Local), UserId = 2 },
+                        new { RentalId = 2, BookId = 2, RentalDate = new DateTime(2018, 11, 10, 16, 39, 53, 653, DateTimeKind.Local), UserId = 1 }
+                    );
                 });
 
             modelBuilder.Entity("Librarian.Models.User", b =>
                 {
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adress");
+                    b.Property<string>("Address");
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("FisrtName");
+                    b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
 
                     b.Property<string>("PhoneNumber");
 
-                    b.HasKey("UserID");
+                    b.HasKey("UserId");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new { UserId = 1, Address = "Midgar Garden 24b", Email = "john.slavinsky@yahoo.com", FirstName = "John", LastName = "Slavinsky" },
+                        new { UserId = 2, Address = "Madison Square 255 3b", Email = "amanda55@yahoo.com", FirstName = "Amanda", LastName = "Stevens", PhoneNumber = "555-234-523" }
+                    );
+                });
+
+            modelBuilder.Entity("Librarian.Models.Book", b =>
+                {
+                    b.HasOne("Librarian.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Librarian.Models.Publisher", "Publisher")
+                        .WithMany()
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Librarian.Models.Rental", b =>
+                {
+                    b.HasOne("Librarian.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Librarian.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

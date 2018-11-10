@@ -10,7 +10,7 @@ namespace Librarian.Models
     public class Book
     {
         [Key]
-        public int ID { get; set; }
+		public int BookId { get; set; }
 
         [Display(Name = "ISBN")]
         public string ISBN { get; set; }
@@ -18,10 +18,10 @@ namespace Librarian.Models
         [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Display(Name = "AuthorID")]
-        public string AuthorID { get; set; }
+		public int AuthorId { get; set; }
+		public Author Author { get; set; }
 
-        [Display(Name = "PublisherID")]
-        public string PublisherID { get; set; }
+		public int PublisherId { get; set; }
+		public Publisher Publisher { get; set; }
     }
 }

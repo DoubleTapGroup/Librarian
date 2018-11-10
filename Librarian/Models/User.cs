@@ -7,27 +7,24 @@ using System.Threading.Tasks;
 
 namespace Librarian.Models
 {
-   public class User
-   {
-      [Key]
-      public int UserID { get; set; }
+	public class User
+	{
+		[Key]
+		public int UserId { get; set; }
 
-      [Display(Name = "First Name")]
-      public string FisrtName { get; set; }
+		[Display(Name = "First Name")]
+		public string FirstName { get; set; }
 
-      [Display(Name = "Last Name")]
-      public string LastName { get; set; }
+		[Display(Name = "Last Name")]
+		public string LastName { get; set; }
 
-      [Display(Name = "Phone Number")]
-      public string PhoneNumber { get; set; }
+		[Display(Name = "Phone Number")]
+		public string PhoneNumber { get; set; }
 
-      [Display(Name = "Email")]
-      public string Email { get; set; }
+		[Display(Name = "Email")]
+		public string Email { get; set; }
 
-      [Display(Name = "Adress")]
-      public string Adress { get; set; }
-
-      //[NotMapped]
-      //public virtual ICollection<RentalEvidence> RentalEvidences { get; set; }
-   }
+		[Display(Name = "Address")]
+		public string Address { get; set; }
+	}
 }

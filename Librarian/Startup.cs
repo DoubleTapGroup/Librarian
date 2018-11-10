@@ -49,7 +49,6 @@ namespace Librarian
 			}
 			else
 			{
-				app.UseExceptionHandler("/Home/Error");
 				app.UseHsts();
 			}
 
@@ -60,8 +59,10 @@ namespace Librarian
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
-					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
+					"Default",
+					"{controller}/{action}/{id?}",
+					new { controller = "Home", action = "Index" }
+				);
 			});
 		}
 	}
