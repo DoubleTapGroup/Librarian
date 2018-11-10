@@ -19,14 +19,13 @@ namespace Librarian.Controllers
         }
 
         // GET: Books
-		[HttpGet("/books")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Book.ToListAsync());
+            var librarianContext = _context.Book.Include(b => b.Author).Include(b => b.Publisher);
+            return View(await librarianContext.ToListAsync());
         }
 
 		// GET: Books/Details/5
-		[HttpGet("/books/details/{id?}")]
 		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,7 +34,9 @@ namespace Librarian.Controllers
             }
 
             var book = await _context.Book
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(b => b.Author)
+                .Include(b => b.Publisher)
+                .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {
                 return NotFound();
@@ -44,10 +45,11 @@ namespace Librarian.Controllers
             return View(book);
         }
 
-		// GET: Books/Create
-		[HttpGet("/books/create")]
-		public IActionResult Create()
+        // GET: Books/Create
+        public IActionResult Create()
         {
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId");
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId");
             return View();
         }
 
@@ -56,7 +58,7 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ISBN,Title,AuthorID,PublisherID")] Book book)
+        public async Task<IActionResult> Create([Bind("BookId,ISBN,Title,AuthorId,PublisherId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -64,12 +66,13 @@ namespace Librarian.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", book.AuthorId);
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId", book.PublisherId);
             return View(book);
         }
 
-		// GET: Books/Edit/5
-		[HttpGet("/books/edit/{id?}")]
-		public async Task<IActionResult> Edit(int? id)
+        // GET: Books/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -81,6 +84,8 @@ namespace Librarian.Controllers
             {
                 return NotFound();
             }
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", book.AuthorId);
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId", book.PublisherId);
             return View(book);
         }
 
@@ -89,9 +94,9 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ISBN,Title,AuthorID,PublisherID")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookId,ISBN,Title,AuthorId,PublisherId")] Book book)
         {
-            if (id != book.ID)
+            if (id != book.BookId)
             {
                 return NotFound();
             }
@@ -105,7 +110,7 @@ namespace Librarian.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.ID))
+                    if (!BookExists(book.BookId))
                     {
                         return NotFound();
                     }
@@ -116,12 +121,13 @@ namespace Librarian.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", book.AuthorId);
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId", book.PublisherId);
             return View(book);
         }
 
-		// GET: Books/Delete/5
-		[HttpGet("/books/delete/{id?}")]
-		public async Task<IActionResult> Delete(int? id)
+        // GET: Books/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -129,7 +135,9 @@ namespace Librarian.Controllers
             }
 
             var book = await _context.Book
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(b => b.Author)
+                .Include(b => b.Publisher)
+                .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {
                 return NotFound();
@@ -151,7 +159,7 @@ namespace Librarian.Controllers
 
         private bool BookExists(int id)
         {
-            return _context.Book.Any(e => e.ID == id);
+            return _context.Book.Any(e => e.BookId == id);
         }
     }
 }

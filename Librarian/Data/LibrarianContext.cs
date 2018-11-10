@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Librarian.Models;
 
 namespace Librarian.Models
 {
@@ -13,35 +14,117 @@ namespace Librarian.Models
         {
         }
 
-        public DbSet<Librarian.Models.Book> Book { get; set; }
-		public DbSet<Librarian.Models.Rental> Rental { get; set; }
-		public DbSet<Librarian.Models.User> User { get; set; }
+        public DbSet<Book> Book { get; set; }
+		public DbSet<Rental> Rental { get; set; }
+		public DbSet<User> User { get; set; }
+		public DbSet<Author> Author { get; set; }
+		public DbSet<Publisher> Publisher { get; set; }
 
-        /// <summary>
-        /// Creating seeds for tables in DB
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		/// <summary>
+		/// Creating seeds for tables in DB
+		/// </summary>
+		/// <param name="modelBuilder"></param>
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Rental>().HasData(
-                new Rental { RentalID = 1, RentalDate = new DateTime(2012, 03, 01) },
-                new Rental { RentalID = 2, RentalDate = new DateTime(2015, 11, 05) },
-                new Rental { RentalID = 3, RentalDate = new DateTime(2030, 05, 06) },
-                new Rental { RentalID = 4, RentalDate = new DateTime(2017, 08, 03) });
+			modelBuilder.Entity<Book>()
+				.HasOne(r => r.Author);
 
-            modelBuilder.Entity<Book>().HasData(
-                new Book { ID = 1, ISBN = "1111111111111", Title = "Cooking for dummies", AuthorID = 1, PublisherID = 1 },
-                new Book { ID = 2, ISBN = "2222222222222", Title = "Programming for dummies", AuthorID = 2, PublisherID = 2 },
-                new Book { ID = 3, ISBN = "3333333333333", Title = "Engineering for dummies", AuthorID = 3, PublisherID = 3 },
-                new Book { ID = 4, ISBN = "4444444444444", Title = "Dummies for dummies", AuthorID = 4, PublisherID = 4 });
+			modelBuilder.Entity<Book>()
+				.HasOne(r => r.Publisher);
 
-            modelBuilder.Entity<User>().HasData(
-                new User { UserID = 1, FisrtName = "Bob", LastName = "Johnson", PhoneNumber = "1234567890", Email = "1@gmail.com", Adress = "test1" },
-                new User { UserID = 2, FisrtName = "John", LastName = "Bobson", PhoneNumber = "0987654321", Email = "2@gmail.com", Adress = "test2" },
-                new User { UserID = 3, FisrtName = "Tom", LastName = "Johnson", PhoneNumber = "1238904567", Email = "3@gmail.com", Adress = "test3" },
-                new User { UserID = 4, FisrtName = "John", LastName = "Tomson", PhoneNumber = "0983217654", Email = "4@gmail.com", Adress = "test4" });
-        }
+			modelBuilder.Entity<Rental>()
+				.HasOne(r => r.User);
+
+			modelBuilder.Entity<Rental>()
+				.HasOne(r => r.Book);
+
+			modelBuilder.Entity<Author>().HasData(
+				new Author
+				{
+					AuthorId = 1,
+					Name = "Isaac Asimov"
+				},
+				new Author
+				{
+					AuthorId = 2,
+					Name = "Neil DeGrasse Tyson"
+				}
+			);
+
+			modelBuilder.Entity<Publisher>().HasData(
+				new Publisher
+				{
+					PublisherId = 1,
+					Name = "BigEarth Publishing Company"
+				},
+				new Publisher
+				{
+					PublisherId = 2,
+					Name = "(HOS) High Octane Society"
+				}
+			);
+
+
+			modelBuilder.Entity<Book>().HasData(
+				new Book
+				{
+					BookId = 1,
+					ISBN = "IBS-1024-691",
+					Title = "Physics for people in the hurry",
+					AuthorId = 2,
+					PublisherId = 1,
+				},
+				new Book
+				{
+					BookId = 2,
+					ISBN = "IBS-512-1324",
+					Title = "Autonomous Mind",
+					AuthorId = 1,
+					PublisherId = 2,
+				}
+			);
+
+			modelBuilder.Entity<User>().HasData(
+				new User
+				{
+					UserId = 1,
+					FirstName = "John",
+					LastName = "Slavinsky",
+					PhoneNumber = null,
+					Email = "john.slavinsky@yahoo.com",
+					Address = "Midgar Garden 24b"
+				},
+				new User
+				{
+					UserId = 2,
+					FirstName = "Amanda",
+					LastName = "Stevens",
+					PhoneNumber = "555-234-523",
+					Email = "amanda55@yahoo.com",
+					Address = "Madison Square 255 3b"
+				}
+			);
+
+			modelBuilder.Entity<Rental>().HasData(
+				new Rental
+				{
+					RentalId = 1,
+					RentalDate = DateTime.Now,
+					ReturnDate = null,
+					BookId = 1,
+					UserId = 2
+				},
+				new Rental
+				{
+					RentalId = 2,
+					RentalDate = DateTime.Now,
+					ReturnDate = null,
+					BookId = 2,
+					UserId = 1
+				}
+			);
+		}
     }
 }

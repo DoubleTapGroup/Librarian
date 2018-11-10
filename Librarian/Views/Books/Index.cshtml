@@ -1,58 +1,54 @@
 ﻿@model IEnumerable<Librarian.Models.Book>
 
 @{
-    Layout = "_Layout";
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section ModelList
-{
-<div class="panel">
-    <div class="panel-division">
-        <div class="panel-division">
-            <button type="button">Create</button>
-        </div>
-    </div>
-    <div class="panel-division dim">
-        <table>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ISBN)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AuthorID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PublisherID)
-                </th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ISBN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AuthorID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublisherID)
-                </td>
-                <td class="flex">
-                    <button class="ml-a" type="button">Edit</button>
-                    <button class="ml-4" type="button">Details</button>
-                    <button class="ml-4" type="reset">Delete</button>
-                </td>
-            </tr>
-            }
-        </table>
-    </div>
-</div>
+<h2>Index</h2>
+
+<p>
+    <button type="button">Create New</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.AuthorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher.PublisherId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </td>
+        </tr>
 }
+    </tbody>
+</table>

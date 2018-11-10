@@ -1,53 +1,43 @@
 ﻿@model Librarian.Models.Book
 
 @{
-    Layout = "_Layout";
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section ModelList
-{
-    <div class="panel">
-        <div class="panel-division">
-            <div class="flex">
-                <div class="ml-4">
-                    <b>@Html.DisplayNameFor(model => model.ISBN) :</b>
-                </div>
-                <div class="ml-4">
-                    @Html.DisplayFor(model => model.ISBN)
-                </div>
-            </div>
-            <hr />
-            <div class="flex">
-                <div class="ml-4">
-                    <b>@Html.DisplayNameFor(model => model.Title) :</b>
-                </div>
-                <div class="ml-4">
-                    @Html.DisplayFor(model => model.Title)
-                </div>
-            </div>
-            <hr />
-            <div class="flex">
-                <div class="ml-4">
-                    <b>@Html.DisplayNameFor(model => model.AuthorID) :</b>
-                </div>
-                <div class="ml-4">
-                    @Html.DisplayFor(model => model.AuthorID)
-                </div>
-            </div>
-            <hr />
-            <div class="flex">
-                <div class="ml-4">
-                    <b>@Html.DisplayNameFor(model => model.PublisherID) :</b>
-                </div>
-                <div class="ml-4">
-                    @Html.DisplayFor(model => model.PublisherID)
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex">
-        <button class="ml-4" type="button">Edit</button>
-        <button class="ml-4" type="reset">Back to List</button>
-    </div>
-}
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Author.AuthorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Publisher.PublisherId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

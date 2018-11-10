@@ -1,53 +1,47 @@
 ﻿@model Librarian.Models.User
 
 @{
-    Layout = "_Layout";
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section ModelList
-    {
-    <div class="panel">
-        <div class="panel-division">
-            <div class="panel-division dim">
-                <form>
-                    <div class="input-group">
-                        <div class="input-group-prefix">
-                            <span>First Name</span>
-                        </div>
-                        <input type="text" name="FirstName" />
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prefix">
-                            <span>Last Name</span>
-                        </div>
-                        <input type="text" name="LastName" />
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prefix">
-                            <span>Phone Number</span>
-                        </div>
-                        <input type="text" name="PhoneNumber" />
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prefix">
-                            <span>E-mail</span>
-                        </div>
-                        <input type="text" name="Email" />
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prefix">
-                            <span>Address</span>
-                        </div>
-                        <input type="text" name="Address" />
-                    </div>
-                </form>
-
-                <hr />
-                <div>
-                    <button type="reset">Back to List</button>
-                </div>
+@section Content
+{
+<div class="panel">
+    <div class="panel-division">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserId" />
+            <div class="flex fd-c">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-        </div>
+            <div class="flex fd-c">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="flex fd-c">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="flex fd-c">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="flex fd-c">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <input class="mb-4" type="submit" value="Save"/>
+        </form>
     </div>
+</div>
+
+<a asp-action="Index">Back to List</a>
+
 }

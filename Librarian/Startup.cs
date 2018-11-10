@@ -56,7 +56,14 @@ namespace Librarian
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
 
-			app.UseMvc();
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					"Default",
+					"{controller}/{action}/{id?}",
+					new { controller = "Home", action = "Index" }
+				);
+			});
 		}
 	}
 }

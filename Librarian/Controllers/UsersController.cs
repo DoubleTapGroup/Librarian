@@ -18,15 +18,13 @@ namespace Librarian.Controllers
             _context = context;
         }
 
-		// GET: Users
-		[HttpGet("/users")]
-		public async Task<IActionResult> Index()
+        // GET: Users
+        public async Task<IActionResult> Index()
         {
             return View(await _context.User.ToListAsync());
         }
 
         // GET: Users/Details/5
-        [HttpGet("/users/details/{id?}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,18 +32,17 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var usersModel = await _context.User
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (usersModel == null)
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(usersModel);
+            return View(user);
         }
 
         // GET: Users/Create
-        [HttpGet("/users/create")]
         public IActionResult Create()
         {
             return View();
@@ -56,19 +53,18 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,FisrtName,LastName,PhoneNumber,Email,Adress")] User usersModel)
+        public async Task<IActionResult> Create([Bind("UserId,FirstName,LastName,PhoneNumber,Email,Address")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(usersModel);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(usersModel);
+            return View(user);
         }
 
         // GET: Users/Edit/5
-        [HttpGet("/users/edit/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,12 +72,12 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var usersModel = await _context.User.FindAsync(id);
-            if (usersModel == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(usersModel);
+            return View(user);
         }
 
         // POST: Users/Edit/5
@@ -89,9 +85,9 @@ namespace Librarian.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,FisrtName,LastName,PhoneNumber,Email,Adress")] User usersModel)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,Email,Address")] User user)
         {
-            if (id != usersModel.UserID)
+            if (id != user.UserId)
             {
                 return NotFound();
             }
@@ -100,12 +96,12 @@ namespace Librarian.Controllers
             {
                 try
                 {
-                    _context.Update(usersModel);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsersModelExists(usersModel.UserID))
+                    if (!UserExists(user.UserId))
                     {
                         return NotFound();
                     }
@@ -116,11 +112,10 @@ namespace Librarian.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(usersModel);
+            return View(user);
         }
 
         // GET: Users/Delete/5
-        [HttpGet("/users/delete/{id?}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,14 +123,14 @@ namespace Librarian.Controllers
                 return NotFound();
             }
 
-            var usersModel = await _context.User
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (usersModel == null)
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(usersModel);
+            return View(user);
         }
 
         // POST: Users/Delete/5
@@ -143,15 +138,15 @@ namespace Librarian.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usersModel = await _context.User.FindAsync(id);
-            _context.User.Remove(usersModel);
+            var user = await _context.User.FindAsync(id);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UsersModelExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.UserID == id);
+            return _context.User.Any(e => e.UserId == id);
         }
     }
 }
