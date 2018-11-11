@@ -44,9 +44,10 @@
                             @Html.DisplayFor(modelItem => item.User.UserId)
                         </td>
                         <td class="flex">
-                            <a class="ml-a" asp-action="Edit" asp-route-id="@item.RentalId">Edit</a>
-                            <a class="ml-4" asp-action="Details" asp-route-id="@item.RentalId">Details</a>
-                            <a class="ml-4" asp-action="Delete" asp-route-id="@item.RentalId">Delete</a>
+                            <a class="ml-a" asp-action="Return" asp-route-id="@item.RentalId">Return</a>
+                            <a class="ml-16" asp-action="Edit" asp-route-id="@item.RentalId">Edit</a>
+                            <a class="ml-16" asp-action="Details" asp-route-id="@item.RentalId">Details</a>
+                            <a class="ml-16" asp-action="Delete" asp-route-id="@item.RentalId">Delete</a>
                         </td>
                     </tr>
                 }

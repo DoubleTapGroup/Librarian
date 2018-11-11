@@ -5,17 +5,17 @@
     display: flex
 }
 
-    .flex.fd-c {
-        flex-direction: column
-    }
+.flex.fd-c {
+    flex-direction: column
+}
 
-    .flex.ai-c {
-        align-items: center
-    }
+.flex.ai-c {
+    align-items: center
+}
 
-    .flex.ai-fs {
-        align-items: flex-start
-    }
+.flex.ai-fs {
+    align-items: flex-start
+}
 
 .fg-1 {
     flex-grow: 1

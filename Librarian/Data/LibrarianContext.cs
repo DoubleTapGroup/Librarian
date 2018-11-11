@@ -50,10 +50,6 @@ namespace Librarian.Models
 				{
 					AuthorId = 2,
 					Name = "Neil DeGrasse Tyson"
-<<<<<<< HEAD
-				}
-			);
-=======
 				},
                 new Author
                 {
@@ -121,7 +117,6 @@ namespace Librarian.Models
                     Name = "Robert Alvis"
                 }
             );
->>>>>>> Back-end
 
 			modelBuilder.Entity<Publisher>().HasData(
 				new Publisher
@@ -133,10 +128,6 @@ namespace Librarian.Models
 				{
 					PublisherId = 2,
 					Name = "(HOS) High Octane Society"
-<<<<<<< HEAD
-				}
-			);
-=======
 				},
                 new Publisher
                 {
@@ -204,8 +195,6 @@ namespace Librarian.Models
                     Name = "Round Publishing"
                 }
             );
->>>>>>> Back-end
-
 
 			modelBuilder.Entity<Book>().HasData(
 				new Book
@@ -223,10 +212,6 @@ namespace Librarian.Models
 					Title = "Autonomous Mind",
 					AuthorId = 1,
 					PublisherId = 2,
-<<<<<<< HEAD
-				}
-			);
-=======
 				},
                 new Book
                 {
@@ -325,7 +310,6 @@ namespace Librarian.Models
                     PublisherId = 12,
                 }
             );
->>>>>>> Back-end
 
 			modelBuilder.Entity<User>().HasData(
 				new User
@@ -345,29 +329,6 @@ namespace Librarian.Models
 					PhoneNumber = "555-234-523",
 					Email = "amanda55@yahoo.com",
 					Address = "Madison Square 255 3b"
-<<<<<<< HEAD
-				}
-			);
-
-			modelBuilder.Entity<Rental>().HasData(
-				new Rental
-				{
-					RentalId = 1,
-					RentalDate = DateTime.Now,
-					ReturnDate = null,
-					BookId = 1,
-					UserId = 2
-				},
-				new Rental
-				{
-					RentalId = 2,
-					RentalDate = DateTime.Now,
-					ReturnDate = null,
-					BookId = 2,
-					UserId = 1
-				}
-			);
-=======
 				},
                 new User
                 {
@@ -601,7 +562,6 @@ namespace Librarian.Models
                     UserId = 12
                 }
             );
->>>>>>> Back-end
 		}
     }
 }
