@@ -4,43 +4,46 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Rental</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RentalDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RentalDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ReturnDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Book)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Book.BookId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.UserId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="RentalId" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+@section Content
+    {
+    <div class="panel">
+        <div class="panel-division">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.RentalDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RentalDate)
+                </dd>
+                <hr />
+                <dt>
+                    @Html.DisplayNameFor(model => model.ReturnDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ReturnDate)
+                </dd>
+                <hr />
+                <dt>
+                    @Html.DisplayNameFor(model => model.Book)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Book.BookId)
+                </dd>
+                <hr />
+                <dt>
+                    @Html.DisplayNameFor(model => model.User)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.User.UserId)
+                </dd>
+            </dl>
+        </div>
+        <div class="panel-division dim">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="RentalId" />
+                <input type="submit" value="Delete" class="btn btn-default" />
+                <a asp-action="Index">Back to List</a>
+            </form>
+        </div>
+    </div>
+}
