@@ -61,6 +61,9 @@ namespace Librarian.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RentalId,RentalDate,ReturnDate,BookId,UserId")] Rental rental)
         {
+            if (_context.Rental.Any(p => p.BookId == rental.BookId))
+               return View("index");
+
             if (ModelState.IsValid)
             {
                 _context.Add(rental);
