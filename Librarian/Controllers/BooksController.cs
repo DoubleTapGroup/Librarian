@@ -48,8 +48,8 @@ namespace Librarian.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId");
-            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId");
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "Name");
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "Name");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace Librarian.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", book.AuthorId);
-            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId", book.PublisherId);
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "Name", book.AuthorId);
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "Name", book.PublisherId);
             return View(book);
         }
 
@@ -84,8 +84,8 @@ namespace Librarian.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", book.AuthorId);
-            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId", book.PublisherId);
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "Name", book.AuthorId);
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "Name", book.PublisherId);
             return View(book);
         }
 
@@ -121,8 +121,8 @@ namespace Librarian.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", book.AuthorId);
-            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "PublisherId", book.PublisherId);
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "Name", book.AuthorId);
+            ViewData["PublisherId"] = new SelectList(_context.Set<Publisher>(), "PublisherId", "Name", book.PublisherId);
             return View(book);
         }
 

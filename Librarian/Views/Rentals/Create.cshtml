@@ -12,21 +12,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="flex fd-c">
-                <label asp-for="RentalDate"></label>
-                <input asp-for="RentalDate" />
-                <span asp-validation-for="RentalDate" class="text-danger"></span>
-            </div>
-            <div class="flex fd-c">
-                <label asp-for="ReturnDate"></label>
-                <input asp-for="ReturnDate"/>
-                <span asp-validation-for="ReturnDate" class="text-danger"></span>
-            </div>
-            <div class="flex fd-c">
-                <label asp-for="BookId"></label>
+                <label asp-for="BookId">Book</label>
                 <select asp-for="BookId" asp-items="ViewBag.BookId"></select>
             </div>
             <div class="flex fd-c">
-                <label asp-for="UserId"></label>
+                <label asp-for="UserId">User</label>
                 <select asp-for="UserId" asp-items="ViewBag.UserId"></select>
             </div>
             <input type="submit" value="Create" />

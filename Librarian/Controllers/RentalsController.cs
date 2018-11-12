@@ -22,6 +22,11 @@ namespace Librarian.Controllers
         public async Task<IActionResult> Index()
         {
             var librarianContext = _context.Rental.Include(r => r.Book).Include(r => r.User);
+
+			var value = TempData["FlashMessage"];
+
+			ViewData["FlashMessage"] = value;
+
             return View(await librarianContext.ToListAsync());
         }
 
@@ -49,10 +54,32 @@ namespace Librarian.Controllers
         // GET: Rentals/Create
         public IActionResult Create()
         {
-            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId");
-            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId");
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "Title");
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "Name");
+
             return View();
         }
+
+		// GET: Rentals/Return/5
+		public async Task<IActionResult> Return(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			var rental = await _context.Rental.FindAsync(id);
+			if (rental == null)
+			{
+				return NotFound();
+			}
+
+			rental.ReturnDate = DateTime.Now;
+
+			await _context.SaveChangesAsync();
+
+			return RedirectToAction(nameof(Index));
+		}
 
         // POST: Rentals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -61,17 +88,22 @@ namespace Librarian.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RentalId,RentalDate,ReturnDate,BookId,UserId")] Rental rental)
         {
-            if (_context.Rental.Any(p => p.BookId == rental.BookId))
-               return View("index");
-
             if (ModelState.IsValid)
             {
+				if (_context.Rental.Any(p => p.ReturnDate == null && p.BookId == rental.BookId))
+				{
+					TempData["FlashMessage"] = "This book is currently rented out!";
+
+					return RedirectToAction(nameof(Index));
+				}
+
                 _context.Add(rental);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", rental.BookId);
-            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId", rental.UserId);
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "Title", rental.BookId);
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "Name", rental.UserId);
+
             return View(rental);
         }
 
@@ -88,8 +120,8 @@ namespace Librarian.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", rental.BookId);
-            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId", rental.UserId);
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "Title", rental.BookId);
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "Name", rental.UserId);
             return View(rental);
         }
 
@@ -125,8 +157,8 @@ namespace Librarian.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "BookId", rental.BookId);
-            ViewData["UserId"] = new SelectList(_context.User, "UserId", "UserId", rental.UserId);
+            ViewData["BookId"] = new SelectList(_context.Book, "BookId", "Title", rental.BookId);
+            ViewData["UserId"] = new SelectList(_context.User, "UserId", "Name", rental.UserId);
             return View(rental);
         }
 

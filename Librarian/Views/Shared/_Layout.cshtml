@@ -10,6 +10,8 @@
 <body>
     @await Html.PartialAsync("_Nav.cshtml")
 
+    @await Html.PartialAsync("_FlashMessage")
+
     <div id="wrapper" class="flex">
         @await Html.PartialAsync("_Menu.cshtml")
         <div id="content" class="flex fd-c fg-1">
@@ -42,6 +44,21 @@
 </html>
 
 <style>
+    #fmessage {
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 8px;
+        background: #cc5c28;
+        color: white;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
     table
     {
         display: flex;

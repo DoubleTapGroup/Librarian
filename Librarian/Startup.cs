@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Librarian.Models;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Librarian
 {
@@ -29,14 +30,19 @@ namespace Librarian
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
-				options.CheckConsentNeeded = context => true;
+				options.CheckConsentNeeded = context => false;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);      
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
+			services.AddSession();
+			services.AddMemoryCache();
+			services.AddDistributedMemoryCache();
 
-		    services.AddDbContext<LibrarianContext>(options =>
+			services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+
+			services.AddDbContext<LibrarianContext>(options =>
 		            options.UseSqlServer(Configuration.GetConnectionString("LibrarianContext")));
 		}
 
@@ -55,6 +61,7 @@ namespace Librarian
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
+			app.UseSession();
 
 			app.UseMvc(routes =>
 			{

@@ -26,5 +26,8 @@ namespace Librarian.Models
 
 		[Display(Name = "Address")]
 		public string Address { get; set; }
+
+		[NotMapped]
+		public string Name { get => FirstName + " " + LastName; set => Name = value; }
 	}
 }

@@ -12,8 +12,8 @@ namespace Librarian.Models
         [Key]
 		public int RentalId { get; set; }
 
-        [Display(Name = "Rental date")]
-        public DateTime RentalDate { get; set; }
+		[Display(Name = "Rental date")]
+		public DateTime RentalDate { get; set; } = DateTime.Now;
 
         [Display(Name = "Return date")]
         public DateTime? ReturnDate { get; set; }
