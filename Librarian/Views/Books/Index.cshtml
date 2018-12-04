@@ -38,10 +38,10 @@
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Author.AuthorId)
+                            @Html.DisplayFor(modelItem => item.Author.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Publisher.PublisherId)
+                            @Html.DisplayFor(modelItem => item.Publisher.Name)
                         </td>
                         <td class="flex">
                             <a class="ml-a" asp-action="Edit" asp-route-id="@item.BookId">Edit</a>

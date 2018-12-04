@@ -27,6 +27,12 @@ namespace Librarian.Models
 		[Display(Name = "Address")]
 		public string Address { get; set; }
 
+		[Display(Name = "Rank")]
+		public string Rank { get; set; }
+
+		[DataType(DataType.Password)]
+		public string Password { get; set; }
+
 		[NotMapped]
 		public string Name { get => FirstName + " " + LastName; set => Name = value; }
 	}

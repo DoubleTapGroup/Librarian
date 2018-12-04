@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Librarian.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Librarian.Middleware;
 
 namespace Librarian
 {
@@ -34,11 +35,12 @@ namespace Librarian
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
 			services.AddSession();
 			services.AddMemoryCache();
 			services.AddDistributedMemoryCache();
+
+			services.AddHttpContextAccessor();
 
 			services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 

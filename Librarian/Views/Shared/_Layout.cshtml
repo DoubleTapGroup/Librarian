@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Librarian.Middleware;
+
+@{
+    var auth = new Auth(this.Context);
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,6 +14,11 @@
     <link rel="stylesheet" href="~/css/epii.min.css" />
 </head>
 <body>
+    @if (!auth.IsAuthenticated())
+    {
+        this.Context.Response.Redirect("/login");
+    }
+
     @await Html.PartialAsync("_Nav.cshtml")
 
     @await Html.PartialAsync("_FlashMessage")
@@ -59,35 +70,30 @@
         line-height: 1;
     }
 
-    table
-    {
+    table {
         display: flex;
         flex-wrap: wrap;
     }
 
-    tbody
-    {
+    tbody {
         width: 100%;
     }
 
-    td
-    {
+    td {
         display: flex;
         align-items: center;
         width: 100%;
         padding: 16px;
     }
 
-    th 
-    {
+    th {
         display: flex;
         align-items: center;
         width: 100%;
         padding: 16px;
     }
 
-    tr
-    {
+    tr {
         display: flex;
         align-content: space-between;
     }

@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Librarian.Migrations
 {
     [DbContext(typeof(LibrarianContext))]
-    [Migration("20181111154322_Init")]
+    [Migration("20181204222343_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -146,21 +146,21 @@ namespace Librarian.Migrations
                     b.ToTable("Rental");
 
                     b.HasData(
-                        new { RentalId = 1, BookId = 1, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 482, DateTimeKind.Local), UserId = 2 },
-                        new { RentalId = 2, BookId = 2, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), UserId = 1 },
-                        new { RentalId = 3, BookId = 14, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), UserId = 10 },
+                        new { RentalId = 1, BookId = 1, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 2 },
+                        new { RentalId = 2, BookId = 2, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 1 },
+                        new { RentalId = 3, BookId = 14, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 10 },
                         new { RentalId = 4, BookId = 2, RentalDate = new DateTime(2018, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 1 },
                         new { RentalId = 5, BookId = 1, RentalDate = new DateTime(2017, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2017, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 4 },
                         new { RentalId = 6, BookId = 2, RentalDate = new DateTime(2017, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 1 },
                         new { RentalId = 7, BookId = 9, RentalDate = new DateTime(2017, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2017, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 13 },
-                        new { RentalId = 8, BookId = 14, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), UserId = 8 },
+                        new { RentalId = 8, BookId = 14, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 8 },
                         new { RentalId = 9, BookId = 1, RentalDate = new DateTime(2018, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2018, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 1 },
                         new { RentalId = 10, BookId = 11, RentalDate = new DateTime(2018, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2018, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 9 },
                         new { RentalId = 11, BookId = 13, RentalDate = new DateTime(2018, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2018, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 3 },
-                        new { RentalId = 12, BookId = 7, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), UserId = 5 },
-                        new { RentalId = 13, BookId = 4, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), UserId = 8 },
+                        new { RentalId = 12, BookId = 7, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 5 },
+                        new { RentalId = 13, BookId = 4, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 8 },
                         new { RentalId = 14, BookId = 12, RentalDate = new DateTime(2018, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), ReturnDate = new DateTime(2018, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), UserId = 11 },
-                        new { RentalId = 15, BookId = 4, RentalDate = new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), UserId = 12 }
+                        new { RentalId = 15, BookId = 4, RentalDate = new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), UserId = 12 }
                     );
                 });
 
@@ -178,7 +178,11 @@ namespace Librarian.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("Rank");
 
                     b.HasKey("UserId");
 
@@ -198,7 +202,8 @@ namespace Librarian.Migrations
                         new { UserId = 11, Address = "Brock Avenue 10b", Email = "William34@yahoo.com", FirstName = "William", LastName = "Terrens" },
                         new { UserId = 12, Address = "Diamond Avenue 87", Email = "VNick21@yahoo.com", FirstName = "Nick", LastName = "Valentine" },
                         new { UserId = 13, Address = "Hollow Avenue 34a", Email = "SarahEnger@outlook.com", FirstName = "Sarah", LastName = "Enger", PhoneNumber = "325-225-701" },
-                        new { UserId = 14, Address = "Central Avenue 24a", Email = "Rose99@yahoo.com", FirstName = "Rose", LastName = "Kinner" }
+                        new { UserId = 14, Address = "Central Avenue 24a", Email = "Rose99@yahoo.com", FirstName = "Rose", LastName = "Kinner" },
+                        new { UserId = 15, Address = "Monolith Gener 2b", Email = "admin@librarian.com", FirstName = "Terry", LastName = "Adminsky", Password = "admin", Rank = "admin" }
                     );
                 });
 

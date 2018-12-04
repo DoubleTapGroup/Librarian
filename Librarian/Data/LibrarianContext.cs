@@ -437,8 +437,19 @@ namespace Librarian.Models
                     PhoneNumber = null,
                     Email = "Rose99@yahoo.com",
                     Address = "Central Avenue 24a"
-                }
-            );
+                },
+				new User
+				{
+					UserId = 15,
+					FirstName = "Terry",
+					LastName = "Adminsky",
+					PhoneNumber = null,
+					Email = "admin@librarian.com",
+					Address = "Monolith Gener 2b",
+					Password = "admin",
+					Rank = "admin"
+				}
+			);
 
             modelBuilder.Entity<Rental>().HasData(
                 new Rental

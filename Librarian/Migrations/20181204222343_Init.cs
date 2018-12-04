@@ -44,7 +44,9 @@ namespace Librarian.Migrations
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true)
+                    Address = table.Column<string>(nullable: true),
+                    Rank = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -141,35 +143,36 @@ namespace Librarian.Migrations
                     { 12, "(BLS) Blue Sky Publishing" },
                     { 11, "Historical Publishing" },
                     { 9, "(MGP) MotoGP Publishing" },
+                    { 8, "(PHC) Philosophical Publishing Company" },
                     { 7, "Hometown Publishing Company" },
                     { 6, "Green Glass Publishing" },
                     { 5, "(AVL) Aviation Lovers" },
                     { 4, "(RBA) Russian Books Art" },
                     { 3, "Painting Society" },
                     { 2, "(HOS) High Octane Society" },
-                    { 1, "BigEarth Publishing Company" },
-                    { 8, "(PHC) Philosophical Publishing Company" }
+                    { 1, "BigEarth Publishing Company" }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "UserId", "Address", "Email", "FirstName", "LastName", "PhoneNumber" },
+                columns: new[] { "UserId", "Address", "Email", "FirstName", "LastName", "Password", "PhoneNumber", "Rank" },
                 values: new object[,]
                 {
-                    { 13, "Hollow Avenue 34a", "SarahEnger@outlook.com", "Sarah", "Enger", "325-225-701" },
-                    { 12, "Diamond Avenue 87", "VNick21@yahoo.com", "Nick", "Valentine", null },
-                    { 11, "Brock Avenue 10b", "William34@yahoo.com", "William", "Terrens", null },
-                    { 10, "Guiness Square 3", "MAmanda2@outlook.com", "Amanda", "Miller", null },
-                    { 9, "Central Avenue 45a", "GeorgeY@yahoo.com", "George", "Yellow", "992-255-260" },
-                    { 8, "Madison Square 260 3a", "PB22@gmail.com", "Phoebe", "Bertram", "555-119-653" },
-                    { 4, "Brock Avenue 4c", "Susan29@gmail.com", "Susan", "Finte", null },
-                    { 6, "Hollow Avenue 34", "MLon@outlook.com", "Michael", "Lonig", null },
-                    { 5, "Madison Square 301", "CGeller@yahoo.com", "Carol", "Geller", "501-105-228" },
-                    { 3, "Mint Hills 25a", "RTom31@outlook.com", "Tom", "Rogers", "681-442-990" },
-                    { 2, "Madison Square 255 3b", "amanda55@yahoo.com", "Amanda", "Stevens", "555-234-523" },
-                    { 1, "Midgar Garden 24b", "john.slavinsky@yahoo.com", "John", "Slavinsky", null },
-                    { 7, "Green Hills 02c", "ECarter@gmail.com", "Ethan", "Carter", "773-093-442" },
-                    { 14, "Central Avenue 24a", "Rose99@yahoo.com", "Rose", "Kinner", null }
+                    { 13, "Hollow Avenue 34a", "SarahEnger@outlook.com", "Sarah", "Enger", null, "325-225-701", null },
+                    { 12, "Diamond Avenue 87", "VNick21@yahoo.com", "Nick", "Valentine", null, null, null },
+                    { 11, "Brock Avenue 10b", "William34@yahoo.com", "William", "Terrens", null, null, null },
+                    { 10, "Guiness Square 3", "MAmanda2@outlook.com", "Amanda", "Miller", null, null, null },
+                    { 9, "Central Avenue 45a", "GeorgeY@yahoo.com", "George", "Yellow", null, "992-255-260", null },
+                    { 8, "Madison Square 260 3a", "PB22@gmail.com", "Phoebe", "Bertram", null, "555-119-653", null },
+                    { 4, "Brock Avenue 4c", "Susan29@gmail.com", "Susan", "Finte", null, null, null },
+                    { 6, "Hollow Avenue 34", "MLon@outlook.com", "Michael", "Lonig", null, null, null },
+                    { 5, "Madison Square 301", "CGeller@yahoo.com", "Carol", "Geller", null, "501-105-228", null },
+                    { 14, "Central Avenue 24a", "Rose99@yahoo.com", "Rose", "Kinner", null, null, null },
+                    { 3, "Mint Hills 25a", "RTom31@outlook.com", "Tom", "Rogers", null, "681-442-990", null },
+                    { 2, "Madison Square 255 3b", "amanda55@yahoo.com", "Amanda", "Stevens", null, "555-234-523", null },
+                    { 1, "Midgar Garden 24b", "john.slavinsky@yahoo.com", "John", "Slavinsky", null, null, null },
+                    { 7, "Green Hills 02c", "ECarter@gmail.com", "Ethan", "Carter", null, "773-093-442", null },
+                    { 15, "Monolith Gener 2b", "admin@librarian.com", "Terry", "Adminsky", "admin", null, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -198,20 +201,20 @@ namespace Librarian.Migrations
                 columns: new[] { "RentalId", "BookId", "RentalDate", "ReturnDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2018, 11, 11, 16, 43, 22, 482, DateTimeKind.Local), null, 2 },
+                    { 1, 1, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 2 },
                     { 5, 1, new DateTime(2017, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2017, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 },
                     { 9, 1, new DateTime(2018, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 2, new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), null, 1 },
+                    { 2, 2, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 1 },
                     { 4, 2, new DateTime(2018, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
                     { 6, 2, new DateTime(2017, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2017, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 12, 7, new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), null, 5 },
-                    { 13, 4, new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), null, 8 },
-                    { 15, 4, new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), null, 12 },
+                    { 12, 7, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 5 },
+                    { 13, 4, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 8 },
+                    { 15, 4, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 12 },
                     { 11, 13, new DateTime(2018, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 7, 9, new DateTime(2017, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2017, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 13 },
                     { 10, 11, new DateTime(2018, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9 },
-                    { 3, 14, new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), null, 10 },
-                    { 8, 14, new DateTime(2018, 11, 11, 16, 43, 22, 485, DateTimeKind.Local), null, 8 },
+                    { 3, 14, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 10 },
+                    { 8, 14, new DateTime(2018, 12, 4, 23, 23, 42, 975, DateTimeKind.Local), null, 8 },
                     { 14, 12, new DateTime(2018, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 11 }
                 });
 
